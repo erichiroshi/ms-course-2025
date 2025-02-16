@@ -14,4 +14,5 @@ public interface WorkerFeignClient {
 
 	@GetMapping("/{id}")
 	ResponseEntity<Worker> findById(@PathVariable Long id);
+
 }

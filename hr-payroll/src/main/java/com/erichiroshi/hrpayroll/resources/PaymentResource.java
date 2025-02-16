@@ -1,5 +1,7 @@
 package com.erichiroshi.hrpayroll.resources;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +22,9 @@ public class PaymentResource {
 	}
 
 	@GetMapping("/{workeyId}/days/{days}")
-	public ResponseEntity<Payment> getPayment(@PathVariable Long workeyId, @PathVariable Integer days) {
-		Payment payment = paymentService.getPayment(workeyId, days);
-		return ResponseEntity.ok(payment);
+	public CompletableFuture<ResponseEntity<Payment>> getPayment(@PathVariable Long workeyId, @PathVariable Integer days) {
+		CompletableFuture<Payment> payment = paymentService.getPayment(workeyId, days);
+		return payment.thenApply(ResponseEntity::ok);
 	}
 
 }
