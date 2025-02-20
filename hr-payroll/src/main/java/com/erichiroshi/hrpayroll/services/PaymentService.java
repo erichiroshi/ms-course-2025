@@ -31,7 +31,7 @@ public class PaymentService {
 
 	public CompletableFuture<Payment> paymentAlternative(long workerId, int days, Throwable throwable) {
 		return CompletableFuture.supplyAsync(() -> {
-			System.out.println("Timeout ou falha detectada: " + throwable.getMessage());
+			System.err.println("Timeout ou falha detectada: " + throwable.getMessage());
 			Payment payment = new Payment("Default Worker", 100.0, days);
 			return payment;
 		});
